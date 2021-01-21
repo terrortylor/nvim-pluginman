@@ -45,10 +45,16 @@ end
 function M.install()
   local require_install = false
   -- check if any plugins or docs need generating
+  -- run post_handler for installed plugins
   for _,plug in pairs(plugins) do
     local missing = M.check_plugin_status(plug)
     if missing then
       require_install = true
+    else
+      -- if post handler func exist run it
+      if plug.post_handler then
+        plug.post_handler()
+      end
     end
   end
 

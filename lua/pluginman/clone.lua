@@ -32,15 +32,23 @@ local function clone(plugin, callback)
   local on_exit_cb = function(code, _)
     if code == 0 then
       plugin:set_installed(true)
+
+      -- run helptags
       if fs.is_directory(docs_path) then
         api.nvim_command('helptags ' .. docs_path)
         plugin:set_docs(true)
       else
         plugin:set_docs(false)
       end
+
+      -- Add to runtime to rpevent having to restart nvim
       if plugin.package == "start" then
-        print("path: " + plugin:get_install_path())
         load.add_to_runtimepath(plugin:get_install_path())
+      end
+
+      -- if post handler func exist run it
+      if plugin.post_handler then
+        plugin.post_handler()
       end
     else
       plugin:set_installed(false)

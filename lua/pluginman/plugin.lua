@@ -7,6 +7,7 @@ Plugin = {
   package = "plugins",
   loaded = "start",
   branch = "master",
+  post_handler = nil,
   installed = false,
   docs = false,
   has_error = false
