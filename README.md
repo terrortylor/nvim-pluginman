@@ -1,3 +1,4 @@
+![Build](https://github.com/terrortylor/nvim-pluginman/workflows/Linting%20and%20style%20checking/badge.svg)
 # nvim-pluginman
 
 A plugin manager for NeoVim, written in Lua. Whilst there are plenty of these things in the wild, I had rolled my own in VimL and when migrating over to Lua decided that it would be a nice to continue that trend.
