@@ -29,6 +29,9 @@ end
 
 function M.check_plugin_status(plugin)
   if fs.is_directory(plugin:get_install_path()) then
+    if plugin.loaded == "start" then
+      api.nvim_command("packadd " .. plugin:get_name())
+    end
     plugin:set_installed(true)
     if fs.is_directory(plugin:get_docs_path()) then
       plugin:set_docs(true)

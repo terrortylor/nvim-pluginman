@@ -7,5 +7,5 @@ lint:
 
 test:
 	@echo "Run tests..."
-	busted -m "./lua/?.lua;./lua/?/?.lua;./lua/?/init.lua" lua
+	nvim --headless -c 'PlenaryBustedDirectory lua/spec/'
 	@echo

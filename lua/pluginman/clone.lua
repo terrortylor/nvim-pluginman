@@ -43,7 +43,7 @@ local function clone(plugin, callback)
 
       -- Add to runtime to rpevent having to restart nvim
       if plugin.package == "start" then
-        load.add_to_runtimepath(plugin:get_install_path())
+        load.add_to_runtimepath(plugin:get_install_path(), plugin:get_name())
       end
 
       -- if post handler func exist run it

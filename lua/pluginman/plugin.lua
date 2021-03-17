@@ -38,7 +38,7 @@ function Plugin:get_install_path()
     self.install_path = string.format('%s/site/pack/%s/%s/%s',
     self.base_path,
     self.package,
-    self.loaded,
+    "opt",
     self:get_name())
   end
   return self.install_path
