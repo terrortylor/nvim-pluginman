@@ -46,10 +46,6 @@ local function clone(plugin, callback)
         load.add_to_runtimepath(plugin:get_install_path(), plugin:get_name())
       end
 
-      -- if post handler func exist run it
-      if plugin.post_handler then
-        plugin.post_handler()
-      end
     else
       plugin:set_installed(false)
       plugin:set_install_error(true)

@@ -4,6 +4,7 @@ require("pluginman.plugin")
 local clone = require('pluginman.clone')
 local view = require('pluginman.view')
 local fs = require("pluginman.filesystem")
+local highlights = require("pluginman.highlights")
 
 -- TODO handle this better
 local api = vim.api
@@ -53,11 +54,12 @@ function M.install()
     local missing = M.check_plugin_status(plug)
     if missing then
       require_install = true
-    else
-      -- if post handler func exist run it
-      if plug.post_handler then
-        plug.post_handler()
-      end
+    -- else
+    --   -- if post handler func exist run it
+    --   if plug.post_handler then
+    --     print("post handler found")
+    --     plug.post_handler()
+    --   end
     end
   end
 
@@ -72,6 +74,20 @@ function M.install()
       clone.get(plug, view_cb)
     end
   end
+
+  for _,plug in pairs(plugins) do
+    if plug.installed then
+      -- if post handler func exist run it
+      if plug.post_handler then
+        plug.post_handler()
+      end
+
+      -- if highlight handler func exist run it
+      if plug.highlight_handler then
+        highlights.register_handler(plug.highlight_handler)
+      end
+    end
+  end
 end
 
 -- TODO add tests
@@ -82,8 +98,13 @@ function M.open_summary_draw()
 end
 
 function M.setup(opts)
-  -- TODO a shallow merge?
-  M.opts = opts
+  M.opts = vim.tbl_extend('force', M.opts, opts or {})
+
+  -- TODO multi line string
+  vim.cmd('augroup plugin_highlights')
+  vim.cmd('autocmd!')
+  vim.cmd("autocmd colorscheme * lua require('pluginman.highlights').apply_highlights()")
+  vim.cmd('augroup END')
 end
 
 

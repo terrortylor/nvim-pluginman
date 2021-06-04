@@ -8,6 +8,7 @@ Plugin = {
   loaded = "start",
   branch = "master",
   post_handler = nil,
+  highlight_handler = nil,
   installed = false,
   docs = false,
   has_error = false
