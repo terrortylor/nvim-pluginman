@@ -20,6 +20,7 @@ If a plugin doesn't exist it will be installed and the summary view is automatic
 
 ```lua
 local plug = require("pluginman")
+plug.setup()
 plug.add("plasticboy/vim-markdown")
 plug.install()
 ```
@@ -45,6 +46,8 @@ plug.add({
   end
 })
 ```
+
+TODO document highlight_handler
 
 # Bootstrapping
 
